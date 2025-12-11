@@ -1,6 +1,6 @@
 import pytest
 from pydantic import ValidationError
-from src.config.settings import Settings
+from config.settings import Settings
 
 
 def test_settings_loads_successfully():
@@ -16,6 +16,3 @@ def test_invalid_db_port(monkeypatch):
 
     with pytest.raises(ValidationError):
         Settings()
-
-
-# test github action 3
