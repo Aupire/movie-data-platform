@@ -45,7 +45,7 @@ jobs:
         run: bandit -r . -x ./tests/
 
       - name: pip audit
-        run: pip_audit
+        run: pip-audit .
 
       # - name: Build Docker image
       #   run: docker build -t ghcr.io/${{ github.repository }}:${{ github.sha }} .
