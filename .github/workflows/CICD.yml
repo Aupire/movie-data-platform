@@ -42,7 +42,7 @@ jobs:
         run: pytest --cov=config --cov=utils
 
       - name: Security checks
-        run: bandit -r . -x .\tests\
+        run: bandit -r . -x ./tests/
 
       - name: pip audit
         run: pip_audit
