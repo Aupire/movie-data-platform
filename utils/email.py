@@ -39,6 +39,8 @@ def send(receiver: str, subject: str, message: str):
         result = True
     except Exception as e:
         logging.warning(f"Error with the email : {e}")
+        logging.warning(f"SMTP_HOST : {settings.SMTP_HOST}")
+        logging.warning(f"SMTP_PORT : {settings.SMTP_PORT}")
         result = False
     finally:
         serveur_smtp.quit()
