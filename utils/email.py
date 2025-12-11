@@ -28,7 +28,7 @@ def send(receiver: str, subject: str, message: str):
     msg.attach(MIMEText(message, "plain"))
 
     try:
-        serveur_smtp = smtplib.SMTP(settings.SMTP_HOST, int(settings.SMTP_PORT))
+        serveur_smtp = smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT)
         serveur_smtp.starttls()
 
         serveur_smtp.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
@@ -39,8 +39,6 @@ def send(receiver: str, subject: str, message: str):
         result = True
     except Exception as e:
         logging.warning(f"Error with the email : {e}")
-        logging.warning(f"SMTP_HOST : {settings.SMTP_HOST}")
-        logging.warning(f"SMTP_PORT : {settings.SMTP_PORT}")
         result = False
     finally:
         serveur_smtp.quit()
