@@ -21,7 +21,7 @@ jobs:
       - name: 'pip audit'
         uses: pypa/gh-action-pip-audit@v1.1.0
         with:
-          inputs: ./requirements.txt
+          inputs: requirements.txt
 
       # - name: 'pip audit'
       #   uses: pypa/gh-action-pip-audit@v1.0.0
