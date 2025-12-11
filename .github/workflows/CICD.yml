@@ -1,0 +1,75 @@
+name: CI-CD
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+env:
+  SMTP_HOST=${{ secrets.SMTP_HOST }}
+  SMTP_PORT=${{ secrets.SMTP_PORT }}
+  SMTP_USER=${{ secrets.SMTP_USER }}
+  SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'action checkout'
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      # - name: 'pip audit'
+      #   uses: pypa/gh-action-pip-audit@v1.1.0
+      #   with:
+      #     inputs: requirements.txt
+      #     no-deps: true
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Black & Ruff
+        run: |
+          black --check .
+          ruff check .
+
+      - name: Run tests
+        run: pytest --cov=config --cov=utils
+
+      - name: Security checks
+        run: bandit -r .
+
+      - name: pip audit
+        run: pip_audit
+
+      # - name: Build Docker image
+      #   run: docker build -t ghcr.io/${{ github.repository }}:${{ github.sha }} .
+
+#       - name: Login to GHCR
+#         uses: docker/login-action@v2
+#         with:
+#           registry: ghcr.io
+#           username: ${{ github.actor }}
+#           password: ${{ secrets.GITHUB_TOKEN }}
+
+#       - name: Push image
+#         run: docker push ghcr.io/${{ github.repository }}:${{ github.sha }}
+
+#   cd:
+#     needs: ci
+#     runs-on: ubuntu-latest
+#     if: github.ref == 'refs/heads/main'
+
+#     steps:
+#       - name: Deploy to Cloud Run
+#         uses: google-github-actions/deploy-cloudrun@v1
+#         with:
+#           service: movie-recommender
+#           image: ghcr.io/${{ github.repository }}:${{ github.sha }}
+#           region: europe-west1
+#           credentials: ${{ secrets.GCP_SA_KEY }}
