@@ -25,5 +25,3 @@ def selectFromDb():
 
     except Exception as e:
         print("Erreur :", e)
-
-#
