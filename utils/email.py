@@ -5,7 +5,7 @@ from config.settings import settings
 from utils.logger import logging
 
 
-def send(receiver: str, subject: str, message: str):
+def send(receiver: str = settings.OWNER_EMAIL, subject: str = "object example", message: str = "message example"):
     """
     Returns True or False according to the sending of the email.
 

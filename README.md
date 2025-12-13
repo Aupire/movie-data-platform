@@ -12,3 +12,8 @@ The current codebase focuses on:
 Business logic (scraping, ingestion, analytics) will be progressively added.
 
 The goal is to build a production-grade movie data platform inspired by real-world data systems.
+
+# Configure Env variables
+```bash
+export SMTP_PORT=587
+```
