@@ -16,6 +16,7 @@ env:
   DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
   DB_HOST: ${{ secrets.DB_HOST }}
   DB_PORT: ${{ secrets.DB_PORT }}
+  OWNER_EMAIL: ${{ secrets.OWNER_EMAIL }}
 
 jobs:
   ci:
@@ -51,6 +52,9 @@ jobs:
 
       - name: Security checks
         run: bandit -r . -x ./tests/
+      
+      - name: final test sending email
+        run : python main.py
 
       # - name: Build Docker image
       #   run: docker build -t ghcr.io/${{ github.repository }}:${{ github.sha }} .
