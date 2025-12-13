@@ -53,8 +53,8 @@ jobs:
       - name: Security checks
         run: bandit -r . -x ./tests/
       
-      - name: final launch cheapest instance
-        run : python ./devops/launch_instance.py
+      - name: final launch instance
+        run : python main.py
 
       # - name: Build Docker image
       #   run: docker build -t ghcr.io/${{ github.repository }}:${{ github.sha }} .
