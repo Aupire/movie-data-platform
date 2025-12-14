@@ -18,6 +18,9 @@ env:
   DB_PORT: ${{ secrets.DB_PORT }}
   OWNER_EMAIL: ${{ secrets.OWNER_EMAIL }}
   AWS_ID_ACCOUNT: ${{ secrets.AWS_ID_ACCOUNT }}
+permissions:
+    id-token: write   
+    contents: read 
 
 jobs:
   ci:
@@ -30,7 +33,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ID_ACCOUNT }}:role/github_actions_ec2_management
-          aws-region: us-east-1
+          aws-region: eu-west-3
 
       - name: Set up Python
         uses: actions/setup-python@v4
