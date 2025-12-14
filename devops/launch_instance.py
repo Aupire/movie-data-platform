@@ -42,7 +42,7 @@ def launch_instance():
                         "timestamp": h["Timestamp"].isoformat(),
                     }
         except Exception as e:
-            logging.warning(f"Error with the email : {e}")
+            logging.warning(f"Error with the launch instance : {e}")
 
     logging.info(json.dumps(lowest, indent=2))
 
